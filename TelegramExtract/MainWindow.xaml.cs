@@ -2,6 +2,7 @@
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,10 +27,6 @@ namespace TelegramExtract
         {
             InitializeComponent();
             channelsListView.Visibility = Visibility.Collapsed;
-            phoneTextBox.Text = "380636860418";
-            apiIDTextBox.Text = "515461";
-            apiHashTextBox.Text = "9ac4483e3706a42ae061aae60d1d585a";
-            savePathTextBox.Text = @"C:\Users\fnkta\Documents\Telegram API\Out";
         }
 
         private async Task Connect()
@@ -54,52 +51,62 @@ namespace TelegramExtract
 
             Task = new Task(() =>
             {
-                Application.Current.Dispatcher.Invoke((() =>
+                try
                 {
-                    channelsListView.Visibility = Visibility.Collapsed;
-                    progress1.IsActive = true;
-                    progress1.Visibility = Visibility.Visible;
-                }));
-
-                var connectTask = Connect();
-                connectTask.Wait();
-
-                if (!channelWritter.IsAuthorized)
-                {
-                    AuthorizeRequest().Wait();
-
                     Application.Current.Dispatcher.Invoke((() =>
                     {
-                        authorizeDialog = new AuthorizeDialog();
-                        authorizeDialog.ShowDialog();
-                        if (authorizeDialog.DialogResult == true)
+                        channelsListView.Visibility = Visibility.Collapsed;
+                        progress1.IsActive = true;
+                        progress1.Visibility = Visibility.Visible;
+                    }));
+
+                    var connectTask = Connect();
+                    connectTask.Wait();
+
+                    if (!channelWritter.IsAuthorized)
+                    {
+                        Task.Wait(4000);
+                        var authTask = AuthorizeRequest();
+                        authTask.Wait();
+
+                        Application.Current.Dispatcher.Invoke((() =>
                         {
-                            authCode = authorizeDialog.ResponseText;
-                        }
-                    }));
+                            authorizeDialog = new AuthorizeDialog();
+                            authorizeDialog.ShowDialog();
+                            if (authorizeDialog.DialogResult == true)
+                            {
+                                authCode = authorizeDialog.ResponseText;
+                            }
+                        }));
 
-                    AuthorizeConfirm(authCode).Wait();
-                }
+                        Task.Wait(4000);
+                        AuthorizeConfirm(authCode).Wait();
+                    }
 
-                if (channelWritter.IsAuthorized)
-                {
-                    var task = channelWritter.GetUserDialogs();
-                    task.Wait();
-                    channels = channelWritter.GetChannelList(task.Result);
+                    if (channelWritter.IsAuthorized)
+                    {
+                        var task = channelWritter.GetUserDialogs();
+                        task.Wait();
+                        channels = channelWritter.GetChannelList(task.Result);
+
+                        Application.Current.Dispatcher.Invoke((() =>
+                        {
+                            channelsListView.ItemsSource = channels;
+                        }));
+                    }
 
                     Application.Current.Dispatcher.Invoke((() =>
                     {
-                        channelsListView.ItemsSource = channels;
+                        channelsListView.Visibility = Visibility.Visible;
+                        progress1.IsActive = false;
+                        progress1.Visibility = Visibility.Collapsed;
+                        saveButton.IsEnabled = true;
                     }));
                 }
-
-                Application.Current.Dispatcher.Invoke((() =>
+                catch (Exception ex)
                 {
-                    channelsListView.Visibility = Visibility.Visible;
-                    progress1.IsActive = false;
-                    progress1.Visibility = Visibility.Collapsed;
-                    saveButton.IsEnabled = true;
-                }));
+                    Debug.WriteLine(ex.Message);
+                }
             });
 
             Task.Start();

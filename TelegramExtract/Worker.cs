@@ -23,4 +23,4 @@ namespace TelegramExtract
             return channelWritter;
         }
     }
-    }
+}
