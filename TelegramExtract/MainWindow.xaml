@@ -1,0 +1,59 @@
+﻿<Controls:MetroWindow  x:Class="TelegramExtract.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:TelegramExtract"
+        mc:Ignorable="d"
+        Title="Telegram Monitor" Width="550" Height="700">
+    <Grid Margin="5 5 5 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="0" />
+        </Grid.RowDefinitions>
+        <iconPacks:PackIconModern Grid.Column="0" Grid.Row="0" Width="60" Height="60" VerticalAlignment="Center" HorizontalAlignment="Center" Kind="OsWindows" />
+        <TextBox x:Name="phoneTextBox" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Enter please the Phone Number" Controls:TextBoxHelper.ClearTextButton="True"/>
+        <TextBox x:Name="apiIDTextBox" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Enter please the API Id (must be integer value)" Controls:TextBoxHelper.ClearTextButton="True"/>
+        <TextBox x:Name="apiHashTextBox" Grid.Column="0" Grid.Row="5" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Enter please the API Hash" Controls:TextBoxHelper.ClearTextButton="True"/>
+        <Button Grid.Column="0" Grid.Row="7" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" Click="Button_Click">
+            <iconPacks:PackIconModern Kind="CloudDownload" />
+        </Button>
+        <StackPanel Grid.Column="0" Grid.Row="9">
+            <Controls:ProgressRing IsActive="False" Visibility="Collapsed" Name="progress1" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <ListView x:Name="channelsListView" SelectionMode="Multiple">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <TextBox x:Name="savePathTextBox" Grid.Column="0" Grid.Row="11" VerticalAlignment="Center" Controls:TextBoxHelper.Watermark="Enter please the Output Path" Controls:TextBoxHelper.ClearTextButton="True" />
+        <StackPanel Grid.Row="13" Grid.Column="0">
+            <Button x:Name="saveButton" IsEnabled="False" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" Click="Button_Click_1">
+                <iconPacks:PackIconModern Kind="Save" />
+            </Button>
+            <Controls:MetroProgressBar x:Name="progressingBar" Height="3" Margin="0 15 0 0" IsIndeterminate="True" Visibility="Hidden" Value="100" />
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>
