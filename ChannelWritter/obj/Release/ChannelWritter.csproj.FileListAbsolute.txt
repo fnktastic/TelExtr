@@ -1,0 +1,12 @@
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\bin\Release\ChannelWritter.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\bin\Release\ChannelWritter.pdb
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\bin\Release\BigMath.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\bin\Release\Ionic.Zip.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\bin\Release\Ionic.ZLib.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\bin\Release\TeleSharp.TL.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\bin\Release\TLSharp.Core.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\bin\Release\Ionic.Zip.xml
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release\ChannelWritter.csproj.CoreCompileInputs.cache
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release\ChannelWritter.csproj.CopyComplete
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release\ChannelWritter.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release\ChannelWritter.pdb

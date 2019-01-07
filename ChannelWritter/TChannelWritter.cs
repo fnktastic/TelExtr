@@ -76,7 +76,6 @@ namespace ChannelWritter
             _channels = _channels.Where(x => channels.Any(y => y == x.Title)).ToArray();
         }
 
-        int counter = 0;
         public void StartMonitor()
         {
             var timer = new System.Timers.Timer { AutoReset = true };
@@ -84,9 +83,6 @@ namespace ChannelWritter
             timer.Elapsed += (sender, args) =>
             {
                 SaveChannelMessages();
-                counter++;
-                if(counter == 15)
-                    Environment.Exit(0);
             };
             timer.Start();
         }
