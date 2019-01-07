@@ -47,8 +47,6 @@ namespace TelegramExtract
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             channelWritter = Worker.GetChannelWriter(phoneTextBox.Text, apiIDTextBox.Text, apiHashTextBox.Text);
-            channelWritter.SetSavePath(savePathTextBox.Text);
-
             Task = new Task(() =>
             {
                 try
@@ -65,7 +63,7 @@ namespace TelegramExtract
 
                     if (!channelWritter.IsAuthorized)
                     {
-                        Task.Wait(4000);
+                        Task.Wait(10000);
                         var authTask = AuthorizeRequest();
                         authTask.Wait();
 
@@ -79,7 +77,7 @@ namespace TelegramExtract
                             }
                         }));
 
-                        Task.Wait(4000);
+                        Task.Wait(10000);
                         AuthorizeConfirm(authCode).Wait();
                     }
 
@@ -116,6 +114,7 @@ namespace TelegramExtract
         {
             try
             {
+                channelWritter.SetSavePath(savePathTextBox.Text);
                 selectedChannels = new List<string>();
                 foreach (var listItem in channelsListView.SelectedItems)
                     selectedChannels.Add(listItem.ToString());

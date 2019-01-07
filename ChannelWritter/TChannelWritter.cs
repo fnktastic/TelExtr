@@ -20,7 +20,7 @@ namespace ChannelWritter
         private TelegramClient _client;
         private TLChannel[] _channels;
         private int[] _channelOffsets;
-        private string savePath;
+        private string _savePath;
 
         public TChannelWritter(string Phone = "", int AppId = -1, string AppHash = "")
         {
@@ -76,13 +76,17 @@ namespace ChannelWritter
             _channels = _channels.Where(x => channels.Any(y => y == x.Title)).ToArray();
         }
 
+        int counter = 0;
         public void StartMonitor()
         {
             var timer = new System.Timers.Timer { AutoReset = true };
-            timer.Interval = 1000 * /*60 * 3*/ 20;
+            timer.Interval = 1000 * 60 * 3;
             timer.Elapsed += (sender, args) =>
             {
                 SaveChannelMessages();
+                counter++;
+                if(counter == 15)
+                    Environment.Exit(0);
             };
             timer.Start();
         }
@@ -113,10 +117,17 @@ namespace ChannelWritter
 
                     var history = (TLChannelMessages)_client.GetHistoryAsync(peerChannel, 0, -1, offset - _channelOffsets[index]).Result;
 
-                    var path = Path.Combine(savePath, GetSafeFilename(channel.Title));
+                    var path = Path.Combine(_savePath, GetSafeFilename(channel.Title));
 
-                    File.AppendAllLines($"{path}.txt", history.Messages.OfType<TLMessage>().Select(x => ((TLMessage)x).Message).Reverse().ToArray());
+                    var lines = history.Messages.OfType<TLMessage>().Select(x => ((TLMessage)x).Message).Reverse();
+                    List<string> newLines = new List<string>();
+                    foreach(var line in lines)
+                    {
+                        newLines.Add("——-new message ——-");
+                        newLines.Add(line);
+                    }
 
+                    File.AppendAllLines($"{path}.txt", newLines);
                     _channelOffsets[index++] = offset;
                 }
             }
@@ -133,7 +144,7 @@ namespace ChannelWritter
 
         public void SetSavePath(string path)
         {
-            savePath = path;
+            _savePath = path;
         }
     }
 }
