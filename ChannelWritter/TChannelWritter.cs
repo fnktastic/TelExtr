@@ -64,9 +64,9 @@ namespace ChannelWritter
 
             var dialogs2 = dialogs.Dialogs.OfType<TLDialog>();
 
-            var offsets = dialogs2.Where(x => x.Peer is TLPeerChannel).Select(x => new { channelId = ((TLPeerChannel)x.Peer).ChannelId, offset = x.ReadInboxMaxId });
+            var offsets = dialogs2.Where(x => x.Peer is TLPeerChannel).Select(x => new { channelId = ((TLPeerChannel)x.Peer).ChannelId, offset = x.TopMessage });
             _channelOffsets = offsets.Select(x => x.offset).ToArray();
-            
+
 
             return _channels.Select(x => x.Title).ToArray();
         }
@@ -100,10 +100,10 @@ namespace ChannelWritter
                         AccessHash = channel.AccessHash.Value
                     };
 
-                    var dialogs = (TLDialogs) await _client.GetUserDialogsAsync();
-        
+                    var dialogs = (TLDialogs)await _client.GetUserDialogsAsync();
+
                     var offset = dialogs.Dialogs.Where(x => (x.Peer is TLPeerChannel) && ((TLPeerChannel)x.Peer).ChannelId == channel.Id)
-                        .Select(x => x.ReadInboxMaxId).FirstOrDefault();
+                        .Select(x => x.TopMessage).FirstOrDefault();
 
                     if (_channelOffsets[index] == offset)
                     {
@@ -111,17 +111,18 @@ namespace ChannelWritter
                         continue;
                     }
 
-                    var history = (TLChannelMessages)_client.GetHistoryAsync(peerChannel, 0, -1, offset - _channelOffsets[index]).Result;
+                    var history = (TLChannelMessages)await _client.GetHistoryAsync(peerChannel, 0, -1, 0, 100, offset + 1, _channelOffsets[index]);
 
                     var path = Path.Combine(_savePath, GetSafeFilename(channel.Title));
 
                     var lines = history.Messages.OfType<TLMessage>().Select(x => ((TLMessage)x).Message).Reverse();
                     List<string> newLines = new List<string>();
-                    foreach(var line in lines)
-                    {
-                        newLines.Add("——-new message ——-");
-                        newLines.Add(line);
-                    }
+                    if (lines != null && lines.Count() > 0)
+                        foreach (var line in lines)
+                        {
+                            newLines.Add("——-new message ——-");
+                            newLines.Add(line);
+                        }
 
                     File.AppendAllLines($"{path}.txt", newLines);
                     _channelOffsets[index++] = offset;

@@ -27,6 +27,10 @@ namespace TelegramExtract
         {
             InitializeComponent();
             channelsListView.Visibility = Visibility.Collapsed;
+            phoneTextBox.Text = "380636860418";
+            apiIDTextBox.Text = "515461";
+            apiHashTextBox.Text = "9ac4483e3706a42ae061aae60d1d585a";
+            savePathTextBox.Text = @"C:\Users\fnkta\Documents\Telegram API\Out";
         }
 
         private async Task Connect()

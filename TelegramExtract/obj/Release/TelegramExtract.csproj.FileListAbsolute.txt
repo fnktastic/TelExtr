@@ -6,9 +6,7 @@ C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Releas
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\MahApps.Metro.dll
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\MahApps.Metro.IconPacks.Modern.dll
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\System.Windows.Interactivity.dll
-C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\TeleSharp.TL.dll
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\TLSharp.Core.dll
-C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\BigMath.dll
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\Ionic.ZLib.dll
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\ChannelWritter.pdb
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\ControlzEx.pdb
