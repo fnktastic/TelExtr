@@ -1,12 +1,16 @@
 ﻿using ChannelWritter;
+using Habanero.Licensing.Validation;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Threading;
 using TeleSharp.TL.Messages;
 
 namespace TelegramExtract
@@ -16,21 +20,128 @@ namespace TelegramExtract
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        private LicenseDialog licenseDialog;
         private AuthorizeDialog authorizeDialog;
         private IList<string> channels;
         private IList<string> selectedChannels;
         private static string authCode = string.Empty;
+        private static string licensePath = string.Empty;
         private static Task Task;
         private TChannelWritter channelWritter;
+        private License license;
+
+        string _filePath = Path.Combine(Directory.GetCurrentDirectory(), "licence.lic");
+        string _productName = "Chammy";
+        string _applicationSecret = "N6bdpAb5CkK3XUcvGuJEyg==";
+        string _publicKey = "BgIAAACkAABSU0ExAAIAAAEAAQCR3Wybv4QNgVAO03uVRaiOnZKyYHUQOJsyR2DVnCnsbRa9ikYzPv9sdv3BjiLeDJdzyWan5kf1Uc6FYcayNV2a";
+        const int invalidLife = 12;
+        const int trialLife = 1200;
 
         public MainWindow()
         {
             InitializeComponent();
-            channelsListView.Visibility = Visibility.Collapsed;
-            phoneTextBox.Text = "380636860418";
-            apiIDTextBox.Text = "515461";
-            apiHashTextBox.Text = "9ac4483e3706a42ae061aae60d1d585a";
-            savePathTextBox.Text = @"C:\Users\fnkta\Documents\Telegram API\Out";
+
+            license = new License(_filePath, _applicationSecret, _publicKey, _productName);
+            license.DoLicenseCheck();
+
+            if (license.Result.State == LicenseState.Invalid)
+            {
+                try
+                {
+                    licenseDialog = new LicenseDialog();
+                    licenseDialog.ShowDialog();
+                    if (licenseDialog.DialogResult == true)
+                    {
+                        licensePath = licenseDialog.ResponseText;
+                        if (File.Exists(_filePath))
+                            File.Delete(_filePath);
+
+                        File.Copy(licensePath, _filePath);
+                        license = new License(licensePath, _applicationSecret, _publicKey, _productName);
+                        license.DoLicenseCheck();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+
+                if (licenseDialog.DialogResult == null || licenseDialog.DialogResult == false)
+                {
+                    Environment.Exit(-1);
+                }
+            }
+            if (license.Result.State == LicenseState.Invalid)
+            {
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        int currentSecond = 0;
+                        while (true)
+                        {
+                            Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
+                            {
+                                shutdownTextBox.Foreground = new SolidColorBrush(Colors.Red);
+                                shutdownTextBox.Text = string.Format("LICENSE INVALID \nShutdown after {0}", (invalidLife - currentSecond).ToString());
+                            }));
+
+                            currentSecond++;
+                            Thread.Sleep(1000);
+                            if (currentSecond == invalidLife)
+                                Environment.Exit(-1);
+                        }
+                    }
+                    catch
+                    {
+                        Environment.Exit(-1);
+                    }
+                });
+            }
+
+
+            if (license.Result.State == LicenseState.Trial)
+            {
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        int currentSecond = 0;
+                        while (true)
+                        {
+                            Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
+                            {
+                                shutdownTextBox.Foreground = new SolidColorBrush(Colors.Gray);
+                                shutdownTextBox.Text = string.Format("TRIAL LICENSE  \nShutdown after {0}", (trialLife - currentSecond).ToString());
+                            }));
+
+                            currentSecond++;
+                            Thread.Sleep(1000);
+                            if (currentSecond == trialLife)
+                                Environment.Exit(-1);
+                        }
+                    }
+                    catch
+                    {
+                        Environment.Exit(-1);
+                    }
+                });
+            }
+
+            if (license.Result.State == LicenseState.Valid)
+            {
+                shutdownTextBox.Foreground = new SolidColorBrush(Colors.LimeGreen);
+                if (license.Validator.IsEdition("Standard"))
+                {
+                    shutdownTextBox.Text = string.Format("LICENSED\nSTANDARD Edition");
+                }
+
+                if (license.Validator.IsEdition("Lite"))
+                {
+                    shutdownTextBox.Text = string.Format("LICENSED\nLITE Edition");
+                }
+            }
+
         }
 
         private async Task Connect()
@@ -50,6 +161,7 @@ namespace TelegramExtract
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string safePhone = phoneTextBox.Text.Replace("+", "");
             channelWritter = Worker.GetChannelWriter(phoneTextBox.Text, apiIDTextBox.Text, apiHashTextBox.Text);
             Task = new Task(() =>
             {

@@ -30,3 +30,11 @@ C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\obj\Releas
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\obj\Release\TelegramExtract.csproj.CopyComplete
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\obj\Release\TelegramExtract.exe
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\obj\Release\TelegramExtract.pdb
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\Habanero.Licensing.Generator.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\Habanero.Licensing.Shared.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\Habanero.Licensing.Validation.dll
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\Habanero.Licensing.Generator.xml
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\Habanero.Licensing.Shared.xml
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\bin\Release\Habanero.Licensing.Validation.xml
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\obj\Release\LicenseDialog.g.cs
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\TelegramExtract\obj\Release\LicenseDialog.baml

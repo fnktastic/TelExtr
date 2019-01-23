@@ -1,0 +1,25 @@
+﻿<Window x:Class="TelegramExtract.LicenseDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TelegramExtract"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="LicenseDialog" Height="200" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <StackPanel Orientation="Horizontal" Height="35" Margin="0 30 0 0">
+                <TextBox x:Name="ResponseTextBox" VerticalContentAlignment="Center" 
+                 Controls:TextBoxHelper.Watermark="- License File Path -" 
+                 Controls:TextBoxHelper.ClearTextButton="True"
+                 Height="35" Width="323"
+                 HorizontalContentAlignment="Center"/>
+                <Button Width="40" Content="..." Click="Button_Click" />
+            </StackPanel>
+            <Button Content="OK"
+                Margin="0 15 0 0"
+                Click="OKButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -10,3 +10,4 @@ C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release\ChannelWritter.csproj.CopyComplete
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release\ChannelWritter.dll
 C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release\ChannelWritter.pdb
+C:\Users\fnkta\Documents\Telegram API\TelegramExtract\ChannelWritter\obj\Release\ChannelWritter.csprojAssemblyReference.cache

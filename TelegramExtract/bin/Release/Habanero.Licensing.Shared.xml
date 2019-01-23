@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Habanero.Licensing.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:Habanero.Licensing.Shared.LicensedProductInformation">
+            <summary>
+            Represents the product and edition for a license instance.
+            </summary>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedProductInformation.#ctor">
+            <summary>
+            Creates a new LicensedProduct.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedProductInformation.ProductName">
+            <summary>
+            The name of the product.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedProductInformation.LicenseName">
+            <summary>
+            The edition for the license.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedProductInformation.MaxVersion">
+            <summary>
+            Maximum version for which the license is valid.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedProductInformation.UseStrongAlgorithm">
+            <summary>
+            Indicates if the license should be created using military strength algorithms.
+            </summary>
+            <remarks>This value is not set when a license has been validated.</remarks>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedProductInformation.ToString">
+            <summary>
+            Converts to a string.
+            </summary>
+            <returns>A string representation of the product.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedProductInformation.Parse(System.String)">
+            <summary>
+            Converts a string representation of a product to a LicensedProductInformation instance.
+            </summary>
+            <param name="s">The string to parse.</param>
+            <returns>A licensed product instance.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedProductInformation.CanParse(System.String)">
+            <summary>
+            Indicates if a string is parseable to a LicensedProductInformation.
+            </summary>
+            <param name="product">The string representation of a product.</param>
+            <returns>True if the string is parseable.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedProductInformation.Equals(System.Object)">
+            <summary>
+            Determines whether the specified Object is equal to the current Object.
+            </summary>
+            <param name="obj">The Object to compare with the current object</param>
+            <returns>true if the specified Object is equal to the current Object; otherwise, false.</returns>
+        </member>
+        <member name="T:Habanero.Licensing.Shared.LicensedUser">
+            <summary>
+            A user for a license.
+            </summary>
+            <remarks>Name and Company may not contain the following symbols | , @</remarks>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedUser.CreateForName(System.String)">
+            <summary>
+            Creates a new User using only a name.
+            </summary>
+            <param name="name">The name of the user.</param>
+            <returns>A new LicensedUser.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedUser.CreateForName(System.String,System.String)">
+            <summary>
+            Creates a new User using name and company.
+            </summary>
+            <param name="name">The name of the user.</param>
+            <param name="company">The name of the users company.</param>
+            <returns>A new LicensedUser.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedUser.CreateForEmail(System.String)">
+            <summary>
+            Creates a new User using only an email.
+            </summary>
+            <param name="email">The users email.</param>
+            <returns>A new LicensedUser.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedUser.CreateForEmail(System.String,System.String)">
+            <summary>
+            Creates a new User using an email and the users company.
+            </summary>
+            <param name="email">The users email.</param>
+            <param name="company">The users company.</param>
+            <returns>A new LicensedUser</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedUser.Create(System.String,System.String,System.String)">
+            <summary>
+            Creates a new user.
+            </summary>
+            <param name="name">The users name.</param>
+            <param name="email">The users email.</param>
+            <param name="company">The users company.</param>
+            <returns>A new LicensedUser</returns>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedUser.Name">
+            <summary>
+            The users name.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedUser.Email">
+            <summary>
+            The users email.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedUser.Company">
+            <summary>
+            The users company.
+            </summary>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedUser.CanParse(System.String)">
+            <summary>
+            Indicates if a string can be parsed into a LicensedUser.
+            </summary>
+            <param name="value">The string to check.</param>
+            <returns>True if the string is parseable.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedUser.Parse(System.String)">
+            <summary>
+            Parses a string into a LicensedUser
+            </summary>
+            <param name="value">The string to parse.</param>
+            <returns>A new LicensedUser.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedUser.Equals(System.Object)">
+            <summary>
+            Determines whether the specified Object is equal to the current Object.
+            </summary>
+            <param name="obj">The Object to compare with the current object</param>
+            <returns>true if the specified Object is equal to the current Object; otherwise, false.</returns>
+        </member>
+        <member name="T:Habanero.Licensing.Shared.LicensedVersionNumber">
+            <summary>
+            Represents an application version number for licenses. LicensedVersionNumbers are used to indicate the maximum
+            application version that license is valid for, the wildcard * is valid for parts of the version.
+            </summary>
+            <remarks>* is not valid for major version if minor version has an integer value i.e. *.4 is not valid. </remarks>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedVersionNumber.#ctor">
+            <summary>
+            Creates a new Version Number for a license. This will default to *.*
+            </summary>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedVersionNumber.#ctor(System.Int32)">
+            <summary>
+            Creates a new Version Number for a license.
+            </summary>
+            <param name="majorversion">The major version part of the version number.</param>
+            <remarks>The minor part will default to *.</remarks>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedVersionNumber.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new Version Number for a license.
+            </summary>
+            <param name="majorversion">The major version part of the version number.</param>
+            <param name="minorVersion">The minor version part of the version number.</param>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedVersionNumber.MajorVersion">
+            <summary>
+            The Major version part of the version number.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicensedVersionNumber.MinorVersion">
+            <summary>
+            The Minor version part of the version number.
+            </summary>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedVersionNumber.Parse(System.String)">
+            <summary>
+            Parses a string into a LicensedVersionNumbner
+            </summary>
+            <param name="value">The string to parse.</param>
+            <returns>A new LicensedVersionNumber.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedVersionNumber.CanParse(System.String)">
+            <summary>
+            Indicates if a string can be parsed into a LicensedVersionNumber.
+            </summary>
+            <param name="value">The string to check.</param>
+            <returns>True if the string is parseable.</returns>
+        </member>
+        <member name="M:Habanero.Licensing.Shared.LicensedVersionNumber.Equals(System.Object)">
+            <summary>
+            Determines whether the specified Object is equal to the current Object.
+            </summary>
+            <param name="obj">The Object to compare with the current object</param>
+            <returns>true if the specified Object is equal to the current Object; otherwise, false.</returns>
+        </member>
+        <member name="T:Habanero.Licensing.Shared.LicenseInformation">
+            <summary>
+            Represents all the information available about a license instance.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicenseInformation.Product">
+            <summary>
+            The product, version and edition that this license is valid for.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicenseInformation.LicensedTo">
+            <summary>
+            A plain string representing the user.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicenseInformation.ValidUntil">
+            <summary>
+            The license expiration date.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicenseInformation.Serial">
+            <summary>
+            The serial part of this license.
+            </summary>
+        </member>
+        <member name="P:Habanero.Licensing.Shared.LicenseInformation.LicenseKey">
+            <summary>
+            The cryptographic signature of this license.
+            </summary>
+        </member>
+        <member name="T:Habanero.Licensing.Shared.NamespaceDoc">
+            <summary>
+            Contains types used for both license validation and generation.
+            </summary>
+        </member>
+        <member name="M:Habanero.Licensing.Util.StringHelper.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Provides an extension method for string IsNullOrWhiteSpace to support this behavior in .Net 3.5
+            </summary>
+            <param name="value">The string to act upon (this)</param>
+            <returns>true if the string is null, empty or composed entirely of whitespace.</returns>
+        </member>
+    </members>
+</doc>

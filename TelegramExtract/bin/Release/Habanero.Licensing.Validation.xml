@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>Habanero.Licensing.Validation</name>
+  </assembly>
+  <members>
+    <member name="T:Habanero.Licensing.Validation.LicenseLocation">
+      <summary>
+            Represent the storage location for the license.
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseLocation.File">
+      <summary>
+            Stored in the regular file system.
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseLocation.UserIsolatedStorage">
+      <summary>
+            Stored in the current user's isolated storage. The license file will only be accesible by the current user.
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseLocation.None">
+      <summary>
+            Never store the license. Only used for License Generation.
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseLocation.MachineIsolatedStorage">
+      <summary>
+            Stored in the machine's isolated storage. The license file will be accesible to all users.
+            </summary>
+    </member>
+    <member name="T:Habanero.Licensing.Validation.LicenseValidationResult">
+      <summary>
+            Indicates the result of a license check.
+            </summary>
+      <remarks>Use this objects properties and methods to determine what state the license is in.</remarks>
+    </member>
+    <member name="P:Habanero.Licensing.Validation.LicenseValidationResult.Issues">
+      <summary>
+            Contains any license validation issues that have been detected.
+            </summary>
+    </member>
+    <member name="P:Habanero.Licensing.Validation.LicenseValidationResult.User">
+      <summary>
+            Gets the LicensedUser or null/Nothing if there is none.
+            </summary>
+    </member>
+    <member name="P:Habanero.Licensing.Validation.LicenseValidationResult.ExpirationDate">
+      <summary>
+            Gets the expiration date or null/Nothing if there is none.
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseValidationResult.State">
+      <summary>
+            Indicates the current state of this license: Valid, Invalid or Trial
+            </summary>
+    </member>
+    <member name="P:Habanero.Licensing.Validation.LicenseValidationResult.RawLicenseData">
+      <summary>
+            The raw license as read from storage.
+            </summary>
+    </member>
+    <member name="P:Habanero.Licensing.Validation.LicenseValidationResult.License">
+      <summary>
+            Gets the license information such as licensed product, version, etc
+            </summary>
+    </member>
+    <member name="T:Habanero.Licensing.Validation.LicenseIssue">
+      <summary>
+            LicenseIssue represents reasons why a license is invalid.
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseIssue.NoLicenseInfo">
+      <summary>
+            There is no license stored
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseIssue.ExpiredDateSoft">
+      <summary>
+            The license has expired but is within a grace period
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseIssue.ExpiredDateHard">
+      <summary>
+            The license has expired and is outside grace period
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseIssue.ExpiredVersion">
+      <summary>
+            The license is for a lower product version
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseIssue.WrongProduct">
+      <summary>
+            The license and current product name do not match
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseIssue.BadLicenseKey">
+      <summary>
+            The cryptographic signature is not valid
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseIssue.BadLicenseFormat">
+      <summary>
+            Ther license file has incorrect content
+            </summary>
+    </member>
+    <member name="T:Habanero.Licensing.Validation.LicenseState">
+      <summary>
+            Represents the state of the license.
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseState.Valid">
+      <summary>
+            The license is valid. 
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseState.Invalid">
+      <summary>
+            The license is invalid.
+            </summary>
+    </member>
+    <member name="F:Habanero.Licensing.Validation.LicenseState.Trial">
+      <summary>
+            The license is valid but only for a trial.
+            </summary>
+    </member>
+    <member name="T:Habanero.Licensing.Validation.LicenseValidator">
+      <summary>
+            Used for validating licenses previously stored or entered by a user. Also supports
+            directly activating a trial.
+            </summary>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.#ctor(Habanero.Licensing.Validation.LicenseLocation,System.String,System.String,System.String,System.String,System.Version)">
+      <summary>
+            Creates a license validator
+            </summary>
+      <param name="location">The type of storage to use</param>
+      <param name="licensePath">The path and file name to use for the license file</param>
+      <param name="productName">The product for which validation is to be done</param>
+      <param name="publicKey">The publickey as exported from the License Manager</param>
+      <param name="applicationSecret">The application secret which is used as a salt. As exported from the License Manager</param>
+      <param name="callersVersion">The current version which is to be verified.</param>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.#ctor(Habanero.Licensing.Validation.LicenseLocation,System.String,System.String,System.String,System.String,System.Version,System.Int32)">
+      <summary>
+            Creates a license validator
+            </summary>
+      <param name="location">The type of storage to use</param>
+      <param name="licensePath">The path and file name to use for the license file</param>
+      <param name="productName">The product for which validation is to be done</param>
+      <param name="publicKey">The publickey as exported from the License Manager</param>
+      <param name="applicationSecret">The application secret which is used as a salt. As exported from the License Manager</param>
+      <param name="callersVersion">The current version which is to be verified</param>
+      <param name="expirationCutoff">A grace period in days to allow a license to be valid after it has expired</param>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.#ctor(Habanero.Licensing.Validation.LicenseLocation,System.String,System.String,System.Byte[],System.Byte[],System.Version)">
+      <summary>
+            Creates a license validator
+            </summary>
+      <param name="location">The type of storage to use</param>
+      <param name="licensePath">The path and file name to use for the license file</param>
+      <param name="productName">The product for which validation is to be done</param>
+      <param name="publicKey">The publickey as a byte array</param>
+      <param name="applicationSecret">The application secret which is used as a salt. As exported from the License Manager</param>
+      <param name="callersVersion">The current version which is to be verified.</param>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.#ctor(Habanero.Licensing.Validation.LicenseLocation,System.String,System.String,System.Byte[],System.Byte[],System.Version,System.Int32)">
+      <summary>
+            Creates a license validator
+            </summary>
+      <param name="location">The type of storage to use</param>
+      <param name="licensePath">The path and file name to use for the license file</param>
+      <param name="productName">The product for which validation is to be done</param>
+      <param name="publicKey">The publickey as a byte array</param>
+      <param name="applicationSecret">The application secret which is used as a salt. As exported from the License Manager</param>
+      <param name="callersVersion">The current version which is to be verified</param>
+      <param name="expirationCutoff">A grace period in days to allow a license to be valid after it has expired</param>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.ActivateTrial(System.Nullable{System.Int32})">
+      <summary>
+            Immediately activates a trial license. Overwriting any existing license.
+            </summary>
+      <param name="days">Number of days trial is valid</param>
+      <returns>Returns the LicenseValidationResult which should always have a trial state.</returns>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.SaveLicense(System.String)">
+      <summary>
+            Saves a string as a license.
+            </summary>
+      <param name="license">The license string to save</param>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.CheckLicense(System.String)">
+      <summary>
+            Runs license validity checks on a string.
+            </summary>
+      <param name="license">A license string.</param>
+      <returns>The license validation result.</returns>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.CheckLicense">
+      <summary>
+            Runs license validity checks on a stored license
+            </summary>
+      <returns>The license validation result.</returns>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.IsEdition(System.String[])">
+      <summary>
+            Checks if a license is for an edition-
+            </summary>
+      <remarks>Don't just check for LicenseState.Valid! To make it more difficult for crackers also sprinkle yout code with checks that other editions return false.</remarks>
+      <param name="validEditions">An array of editions to check for,</param>
+      <returns>True if at least one edition is a match</returns>
+    </member>
+    <member name="M:Habanero.Licensing.Validation.LicenseValidator.IsEdition(System.String)">
+      <summary>
+            Checks if a license is for any edition names in an array.
+            </summary>
+      <param name="validEdition">The single edition to check for.</param>
+      <returns>True if it is a match</returns>
+    </member>
+    <member name="T:Habanero.Licensing.Validation.NamespaceDoc">
+      <summary>
+             Contains types used for validating and working with licenses in the end-user environment.
+             </summary>
+      <example>
+             Below is an example of performing simple validation
+             <code lang="cs">
+                         string[] StandardOrHigher = new string[3] { "Standard", "Pro", "Enterprise" };
+                        string[] ProOrHigher = new string[2] { "Pro", "Enterprise" };
+                        string[] EnterpriseOrHigher = new string[1] { "Enterprise" };
+            
+                        LicenseValidator validator = new LicenseValidator(LicenseLocation.File, LicenseFileLocation, productName, publicKey, applicationSecret, ThisVersion);
+                        LicenseValidationResult result = validator.CheckLicense();
+            
+                        switch (result.State)
+                        {
+                            case LicenseState.Valid:
+                                //users license is valid
+                                break;
+                            case LicenseState.Trial:
+                                //users license is trial
+                                break;
+                            default:
+                                //users license is invalid
+                                break;
+                        }
+            
+                        //check what edition we are running
+            
+                        if (validator.IsEdition(EnterpriseOrHigher))
+                        {
+                            //enable enteprise features           
+                        }
+            
+                        if (validator.IsEdition(ProOrHigher))
+                        {
+                            //enable pro features
+                        }
+            
+                        if (validator.IsEdition(StandardOrHigher))
+                        {
+                            //enable standard features
+                        }
+             </code><code lang="vbnet">
+                    Dim StandardOrHigher() As String = New String() {"Standard", "Pro", "Enterprise"}
+                    Dim ProOrHigher() As String = New String() {"Pro", "Enterprise"}
+                    Dim EnterpriseOrHigher() As String = New String() {"Enterprise"}
+            
+                    Dim validator As LicenseValidator = New LicenseValidator(LicenseLocation.File, LicenseFileLocation, ProductName, publicKey, applicationSecret, ThisVersion)
+                    Dim result As LicenseValidationResult = validator.CheckLicense()
+            
+                    Select Case result.State
+                        Case LicenseState.Valid
+                            'Users license is valid
+                        Case LicenseState.Trial
+                            'Users license is a trial
+                        Case Else
+                            'Users license is invalid
+                    End Select
+            
+                    'check what edition we are running
+            
+                    If (validator.IsEdition(EnterpriseOrHigher)) Then
+                        'Activate Enterprise features
+                    End If
+            
+                    If (validator.IsEdition(ProOrHigher)) Then
+                        'Activate Pro features
+                    End If
+            
+                    If (validator.IsEdition(StandardOrHigher)) Then
+                        'Activate Standard features
+                    End If
+              </code>
+             Note: This example is incomplete.
+             </example>
+    </member>
+    <!-- Badly formed XML comment ignored for member "M:Habanero.Licensing.Internals.Hidden.DeadEnd.IFakeCryptoService.Compare(System.String,System.String)" -->
+  </members>
+</doc>

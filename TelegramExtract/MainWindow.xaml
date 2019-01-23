@@ -7,7 +7,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:TelegramExtract"
         mc:Ignorable="d"
-        Title="Telegram Monitor" Width="550" Height="700">
+        Title="Telegram Monitor" Width="550" Height="720">
     <Grid Margin="5 5 5 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -27,6 +27,7 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="20" />
             <RowDefinition Height="60" />
+            <RowDefinition Height="35" />
             <RowDefinition Height="0" />
         </Grid.RowDefinitions>
         <iconPacks:PackIconModern Grid.Column="0" Grid.Row="0" Width="60" Height="60" VerticalAlignment="Center" HorizontalAlignment="Center" Kind="OsWindows" />
@@ -55,5 +56,6 @@
             </Button>
             <Controls:MetroProgressBar x:Name="progressingBar" Height="3" Margin="0 15 0 0" IsIndeterminate="True" Visibility="Hidden" Value="100" />
         </StackPanel>
+        <TextBlock x:Name="shutdownTextBox" Grid.Row="14" Grid.Column="0" Text="Shutdown" TextAlignment="Center" />
     </Grid>
 </Controls:MetroWindow>

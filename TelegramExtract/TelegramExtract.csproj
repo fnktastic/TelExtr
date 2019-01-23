@@ -13,6 +13,21 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +51,15 @@
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.Licensing.Generator, Version=2.0.0.0, Culture=neutral, PublicKeyToken=07f8d7292c654eb8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.Licensing.Generator.2.4.3\lib\net35-Client\Habanero.Licensing.Generator.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.Licensing.Shared, Version=2.0.0.0, Culture=neutral, PublicKeyToken=07f8d7292c654eb8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.Licensing.Validation.2.4.3\lib\net35-Client\Habanero.Licensing.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.Licensing.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=07f8d7292c654eb8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.Licensing.Validation.2.4.3\lib\net35-Client\Habanero.Licensing.Validation.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
@@ -68,8 +92,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="License.cs" />
+    <Compile Include="LicenseDialog.xaml.cs">
+      <DependentUpon>LicenseDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Worker.cs" />
     <Page Include="AuthorizeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LicenseDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,6 +153,24 @@
       <Project>{467B64D0-7495-4476-898F-419CA92AAFA9}</Project>
       <Name>ChannelWritter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Habanero\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
