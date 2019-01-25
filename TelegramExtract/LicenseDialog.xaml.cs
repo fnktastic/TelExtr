@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace TelegramExtract
     /// <summary>
     /// Логика взаимодействия для LicenseDialog.xaml
     /// </summary>
-    public partial class LicenseDialog : Window
+    public partial class LicenseDialog : MetroWindow
     {
         public LicenseDialog()
         {

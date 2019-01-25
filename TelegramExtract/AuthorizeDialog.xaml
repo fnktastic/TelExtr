@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TelegramExtract"
         mc:Ignorable="d"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="AuthorizeDialog" Height="200" Width="250">
+        Title="Authorize" Height="200" Width="250">
     <StackPanel Margin="10">
         <TextBox x:Name="ResponseTextBox" VerticalContentAlignment="Center" 
                  Controls:TextBoxHelper.Watermark="Enter Authorize Code Here" 
