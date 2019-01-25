@@ -7,6 +7,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:TelegramExtract"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
         Title="Telegram Monitor" Width="550" Height="720">
     <Grid Margin="5 5 5 0">
         <Grid.ColumnDefinitions>
@@ -22,12 +23,12 @@
             <RowDefinition Height="10" />
             <RowDefinition Height="60" />
             <RowDefinition Height="10" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*"  />
             <RowDefinition Height="10" />
             <RowDefinition Height="30" />
             <RowDefinition Height="20" />
             <RowDefinition Height="60" />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="33" />
             <RowDefinition Height="0" />
         </Grid.RowDefinitions>
         <iconPacks:PackIconModern Grid.Column="0" Grid.Row="0" Width="60" Height="60" VerticalAlignment="Center" HorizontalAlignment="Center" Kind="OsWindows" />
@@ -39,7 +40,7 @@
         </Button>
         <StackPanel Grid.Column="0" Grid.Row="9">
             <Controls:ProgressRing IsActive="False" Visibility="Collapsed" Name="progress1" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            <ListView x:Name="channelsListView" SelectionMode="Multiple">
+            <ListView MaxHeight="280" x:Name="channelsListView" SelectionMode="Multiple" ScrollViewer.VerticalScrollBarVisibility="Visible">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -54,7 +55,7 @@
             <Button x:Name="saveButton" IsEnabled="False" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" Click="Button_Click_1">
                 <iconPacks:PackIconModern Kind="Save" />
             </Button>
-            <Controls:MetroProgressBar x:Name="progressingBar" Height="3" Margin="0 15 0 0" IsIndeterminate="True" Visibility="Hidden" Value="100" />
+            <Controls:MetroProgressBar x:Name="progressingBar" Height="5" Margin="0 15 0 0" IsIndeterminate="True" Visibility="Hidden" Value="100" />
         </StackPanel>
         <TextBlock x:Name="shutdownTextBox" Grid.Row="14" Grid.Column="0" Text="Shutdown" TextAlignment="Center" />
     </Grid>

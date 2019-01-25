@@ -142,6 +142,33 @@ namespace TelegramExtract
                 }
             }
 
+            channels = new List<string>();
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channels.Add("fgdf");
+            channelsListView.ItemsSource = channels;
+
         }
 
         private async Task Connect()

@@ -16,7 +16,7 @@
                  Controls:TextBoxHelper.ClearTextButton="True"
                  Height="35" Width="323"
                  HorizontalContentAlignment="Center"/>
-                <Button Width="40" Content="..." Click="Button_Click" />
+                <Button Margin="10 0 0 0" Width="45" Content="..." Click="Button_Click" />
             </StackPanel>
             <Button Content="OK"
                 Margin="0 15 0 0"
